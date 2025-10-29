@@ -1,0 +1,158 @@
+/* === Подключение шрифтов === */
+@font-face {
+  font-family: "Veles-Bold";
+  src: url("Veles-Bold.woff2") format("woff2"),
+       url("Veles-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Geometria-Medium";
+  src: url("Geometria-Medium.woff2") format("woff2"),
+       url("Geometria-Medium.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* === Общие стили === */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: "Geometria-Medium", sans-serif;
+  color: #5a3b2f;
+  background-color: #f6f3ef;
+  overflow-x: hidden;
+}
+
+/* === Главная: секция с фоном === */
+.hero {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 0; /* добавлено! */
+}
+
+.hero img.bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 110%;
+  height: 110%;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  backface-visibility: hidden;
+  z-index: 1; /* фоновое изображение выше нуля */
+}
+
+.hero-content {
+  position: relative; /* вместо absolute */
+  z-index: 2; /* контент поверх фона */
+  top: 50%;
+  left: 75%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #5a3b2f;
+}
+
+
+.hero-content h1 {
+  font-family: "Veles-Bold", sans-serif;
+  font-size: 5em;
+  margin: 0 0 0.5em;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.hero-content nav {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+}
+
+.hero-content nav a {
+  font-family: "Geometria-Medium", sans-serif;
+  text-decoration: none;
+  color: #5a3b2f;
+  font-size: 1.3em;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.hero-content nav a:hover {
+  color: #c48b59;
+  transform: scale(1.05);
+}
+
+/* === Остальные страницы: фоны === */
+.blog-bg, .about-bg {
+  background: url("background_1.jpg") center / cover no-repeat;
+}
+
+/* === Блог: текстовый блок === */
+.blog-frame {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  max-height: 60vh;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  padding: 30px;
+  overflow-y: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.blog-text {
+  color: #3b2a1f;
+  font-size: 1.1em;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+/* === Про нас: статичный текст === */
+.about-text {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  color: #3b2a1f;
+  font-size: 1.1em;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+/* === Навигация на второстепенных страницах === */
+.about-bg nav,
+.blog-bg nav {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  display: flex;
+  gap: 15px;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  backdrop-filter: blur(4px);
+}
+
+.about-bg nav a,
+.blog-bg nav a {
+  color: #2b1a10;
+  text-decoration: none;
+  font-size: 1em;
+  font-family: "Geometria-Medium", sans-serif;
+  transition: color 0.3s ease;
+}
+
+.about-bg nav a:hover,
+.blog-bg nav a:hover {
+  color: #6b3b20;
+}

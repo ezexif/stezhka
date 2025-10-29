@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Стежка</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <section class="hero" id="home">
+    <img class="bg" src="background.jpg" alt="Фон">
+    <div class="hero-content">
+      <h1>Стежка</h1>
+      <nav>
+        <a href="#map">Карта</a>
+        <a href="tour/index.html">Тур</a>
+        <a href="blog.html">Блог</a>
+        <a href="about.html">Про нас</a>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Неактивные разделы — просто заглушки -->
+  <section class="map" id="map"><h2>Карта</h2></section>
+  <section class="tour" id="tour"><h2>Тур</h2></section>
+
+  <!-- ✅ Скрипт в самом конце -->
+  <script>
+  (function() {
+    const bg = document.querySelector(".hero img.bg");
+    if (!bg) return;
+
+    let targetX = 0, targetY = 0, currentX = 0, currentY = 0;
+    const sensitivity = 8;   // сила смещения
+    const smoothness = 0.06; // плавность
+
+    function onPointerMove(e) {
+      const { innerWidth, innerHeight } = window;
+      const x = e.clientX ?? (e.touches?.[0]?.clientX ?? innerWidth / 2);
+      const y = e.clientY ?? (e.touches?.[0]?.clientY ?? innerHeight / 2);
+      targetX = (x / innerWidth - 0.5) * sensitivity;
+      targetY = (y / innerHeight - 0.5) * sensitivity;
+    }
+
+    function onPointerLeave() {
+      targetX = 0;
+      targetY = 0;
+    }
+
+    window.addEventListener("mousemove", onPointerMove, { passive: true });
+    window.addEventListener("touchmove", onPointerMove, { passive: true });
+    window.addEventListener("mouseleave", onPointerLeave);
+    window.addEventListener("touchend", onPointerLeave);
+
+    function animate() {
+      currentX += (targetX - currentX) * smoothness;
+      currentY += (targetY - currentY) * smoothness;
+      bg.style.transform = `translate(-50%, -50%) translate3d(${currentX}px, ${currentY}px, 0)`;
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  })();
+  </script>
+</body>
+</html>
